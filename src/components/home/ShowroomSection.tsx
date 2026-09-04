@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { siteConfig } from "@/data/site.config";
 import { Button } from "@/components/ui/Button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useSiteData } from "@/context/SiteDataContext";
 
 export function ShowroomSection() {
+  const { siteConfig } = useSiteData();
   const { showroom } = siteConfig;
   const reducedMotion = useReducedMotion();
   const [offset, setOffset] = useState(0);

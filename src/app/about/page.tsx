@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+<<<<<<< Updated upstream
 import { siteConfig } from "@/data/site.config";
 import { processSteps } from "@/data/content";
 import { PageHero } from "@/components/ui/PageHero";
@@ -8,6 +9,9 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { SectionLabel, SectionHeading } from "@/components/ui/SectionHeading";
 import { HowWeWork } from "@/components/home/HowWeWork";
+=======
+import { AboutContent } from "@/components/about/AboutContent";
+>>>>>>> Stashed changes
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -24,6 +28,7 @@ const sectionImages = [
 ];
 
 export default function AboutPage() {
+<<<<<<< Updated upstream
   const { about, stats } = siteConfig;
 
   const sections = [
@@ -95,4 +100,7 @@ export default function AboutPage() {
       />
     </>
   );
+=======
+  return <AboutContent />;
+>>>>>>> Stashed changes
 }

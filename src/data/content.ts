@@ -55,7 +55,7 @@ export const beforeAfter = {
   subheading:
     "See how precision aluminium fabrication transforms architectural openings into elegant, functional spaces.",
   before: {
-    image: "https://images.unsplash.com/photo-1605276374101-de7982db7bb1?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1200&q=80",
     label: "Before Installation",
   },
   after: {

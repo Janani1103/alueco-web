@@ -1,16 +1,10 @@
-import Link from "next/link";
-import { siteConfig } from "@/data/site.config";
-import { footerLinks } from "@/data/navigation";
-import { productCategories } from "@/data/products";
-import { Logo } from "@/components/layout/Logo";
+"use client";
 
-const socialIcons = [
-  { name: "Facebook", href: siteConfig.social.facebook, icon: "facebook" },
-  { name: "Instagram", href: siteConfig.social.instagram, icon: "instagram" },
-  { name: "WhatsApp", href: siteConfig.social.whatsapp, icon: "whatsapp" },
-  { name: "YouTube", href: siteConfig.social.youtube, icon: "youtube" },
-  { name: "LinkedIn", href: siteConfig.social.linkedin, icon: "linkedin" },
-];
+import Link from "next/link";
+import { useSiteData } from "@/context/SiteDataContext";
+import { footerLinks } from "@/data/navigation";
+import { productCategories as defaultCategories } from "@/data/products";
+import { Logo } from "@/components/layout/Logo";
 
 function SocialIcon({ icon }: { icon: string }) {
   const paths: Record<string, string> = {
@@ -29,6 +23,18 @@ function SocialIcon({ icon }: { icon: string }) {
 }
 
 export function Footer() {
+  const { siteConfig, products } = useSiteData();
+
+  const socialIcons = [
+    { name: "Facebook", href: siteConfig.social?.facebook || "#", icon: "facebook" },
+    { name: "Instagram", href: siteConfig.social?.instagram || "#", icon: "instagram" },
+    { name: "WhatsApp", href: siteConfig.social?.whatsapp || "#", icon: "whatsapp" },
+    { name: "YouTube", href: siteConfig.social?.youtube || "#", icon: "youtube" },
+    { name: "LinkedIn", href: siteConfig.social?.linkedin || "#", icon: "linkedin" },
+  ];
+
+  const displayProducts = products && products.length > 0 ? products.slice(0, 8) : defaultCategories;
+
   return (
     <footer className="bg-footer text-white/80">
       <div className="container-main py-16">
@@ -36,7 +42,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Logo variant="light" />
             <p className="mt-4 text-sm leading-relaxed text-white/60">
-              Premium aluminium doors, windows and architectural solutions across Sri Lanka.
+              {siteConfig?.footerAbout || siteConfig?.description || "Premium aluminium doors, windows and architectural solutions across Sri Lanka."}
             </p>
             <div className="mt-6 flex gap-3">
               {socialIcons.map((social) => (
@@ -77,7 +83,7 @@ export function Footer() {
               Products
             </h3>
             <ul className="space-y-2.5">
-              {productCategories.map((product) => (
+              {displayProducts.map((product) => (
                 <li key={product.slug}>
                   <Link
                     href={`/products/${product.slug}`}
@@ -127,12 +133,12 @@ export function Footer() {
               </li>
               <li>
                 <span className="block text-white/40">Location</span>
-                {siteConfig.address.line1},<br />
-                {siteConfig.address.line2}
+                {siteConfig.address?.line1},<br />
+                {siteConfig.address?.line2}
               </li>
               <li>
                 <span className="block text-white/40">Website</span>
-                <a href={siteConfig.url} className="hover:text-brand">
+                <a href={siteConfig.url || "https://alueco.lk"} className="hover:text-brand">
                   alueco.lk
                 </a>
               </li>
@@ -144,7 +150,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-main py-6">
           <p className="text-center text-sm text-white/40">
-            © 2026 ALUECO (PVT) LTD. All Rights Reserved.
+            {siteConfig?.copyright || `© ${new Date().getFullYear()} ALUECO Architectural Systems. All Rights Reserved.`}
           </p>
         </div>
       </div>

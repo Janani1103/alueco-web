@@ -4,18 +4,21 @@ import { useState } from "react";
 import { productFilters } from "@/data/products";
 import { ProductCard } from "@/components/products/ProductCard";
 import type { Product } from "@/data/products";
+import { useSiteData } from "@/context/SiteDataContext";
 
 interface ProductGridProps {
   products: Product[];
 }
 
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products: initialProducts }: ProductGridProps) {
+  const { products: contextProducts } = useSiteData();
+  const products = contextProducts && contextProducts.length > 0 ? contextProducts : initialProducts;
   const [active, setActive] = useState("all");
 
   const filtered =
     active === "all"
       ? products
-      : products.filter((p) => p.filterCategory === active);
+      : products.filter((p) => p.filterCategory === active || p.category === active);
 
   return (
     <>

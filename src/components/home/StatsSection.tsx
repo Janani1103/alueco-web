@@ -1,9 +1,12 @@
-import { siteConfig } from "@/data/site.config";
+"use client";
+
+import { useSiteData } from "@/context/SiteDataContext";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 export function StatsSection() {
-  const { stats } = siteConfig;
+  const { siteConfig } = useSiteData();
+  const stats = siteConfig.stats;
 
   return (
     <section className="border-y border-border bg-surface py-14 md:py-16">

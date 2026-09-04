@@ -3,13 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { siteConfig } from "@/data/site.config";
 import { heroQuickChecks, heroTrustIndicators } from "@/data/content";
 import { Button } from "@/components/ui/Button";
 import { LineIcon } from "@/components/ui/LineIcon";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useSiteData } from "@/context/SiteDataContext";
 
 export function Hero() {
+  const { siteConfig } = useSiteData();
   const { hero } = siteConfig;
   const slides = hero.images?.length ? hero.images : [{ src: hero.image, alt: hero.imageAlt }];
   const slideInterval = hero.slideIntervalMs ?? 7000;

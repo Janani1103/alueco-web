@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+<<<<<<< Updated upstream
 import Image from "next/image";
 import { siteConfig } from "@/data/site.config";
 import { Button } from "@/components/ui/Button";
@@ -6,6 +7,9 @@ import { PageHero } from "@/components/ui/PageHero";
 import { PageCTA } from "@/components/ui/PageCTA";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionLabel, SectionHeading } from "@/components/ui/SectionHeading";
+=======
+import { ShowroomContent } from "@/components/showroom/ShowroomContent";
+>>>>>>> Stashed changes
 
 export const metadata: Metadata = {
   title: "Showroom",
@@ -13,6 +17,7 @@ export const metadata: Metadata = {
     "Visit the ALUECO Experience Center in Wellaweriya, Sri Lanka. Explore our premium aluminium products and finishes.",
 };
 
+<<<<<<< Updated upstream
 const showroomFeatures = [
   {
     title: "Product Displays",
@@ -128,4 +133,8 @@ export default function ShowroomPage() {
       />
     </>
   );
+=======
+export default function ShowroomPage() {
+  return <ShowroomContent />;
+>>>>>>> Stashed changes
 }

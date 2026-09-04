@@ -4,18 +4,21 @@ import { useState } from "react";
 import { projectFilters } from "@/data/projects";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import type { Project } from "@/data/projects";
+import { useSiteData } from "@/context/SiteDataContext";
 
 interface ProjectGridProps {
   projects: Project[];
 }
 
-export function ProjectGrid({ projects }: ProjectGridProps) {
+export function ProjectGrid({ projects: initialProjects }: ProjectGridProps) {
+  const { projects: contextProjects } = useSiteData();
+  const projects = contextProjects && contextProjects.length > 0 ? contextProjects : initialProjects;
   const [active, setActive] = useState("all");
 
   const filtered =
     active === "all"
       ? projects
-      : projects.filter((p) => p.filterCategory === active);
+      : projects.filter((p) => p.filterCategory === active || p.category === active);
 
   return (
     <>

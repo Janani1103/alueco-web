@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
 :root {
   --brand-primary: #7cbf00;
   --brand-secondary: #9acd32;
@@ -14,9 +16,26 @@
   --header-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
+
+  /* ALUECO Web Architectural Palette (Light Mode) */
+  --color-slate-50: #f7f9f5;
+  --color-slate-100: #eef3e8;
+  --color-slate-200: #e5e7eb;
+  --color-slate-300: #d1d5db;
+  --color-slate-400: #9aa89c;
+  --color-slate-500: #6b7280;
+  --color-slate-600: #4b5563;
+  --color-slate-700: #374151;
+  --color-slate-800: #1f2933;
+  --color-slate-900: #17202a;
+  --color-slate-950: #0c100e;
+
+  --color-lime-400: #9acd32;
+  --color-lime-500: #7cbf00;
+  --color-lime-600: #689f00;
 }
 
-[data-theme="dark"] {
+[data-theme="dark"], .dark, html.dark {
   --brand-primary: #8ed100;
   --brand-secondary: #a8d832;
   --text-dark: #e2e8e0;
@@ -29,6 +48,23 @@
   --footer-dark: #0c100e;
   --header-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
   color-scheme: dark;
+
+  /* ALUECO Web Architectural Obsidian Palette (Dark Mode) */
+  --color-slate-50: #1a201c;
+  --color-slate-100: #222b24;
+  --color-slate-200: #2d3630;
+  --color-slate-300: #3d4a40;
+  --color-slate-400: #9aa89c;
+  --color-slate-500: #7c8a7e;
+  --color-slate-600: #b0beb2;
+  --color-slate-700: #2d3630;
+  --color-slate-800: #242c26;
+  --color-slate-900: #1a201c;
+  --color-slate-950: #121816;
+
+  --color-lime-400: #a8d832;
+  --color-lime-500: #8ed100;
+  --color-lime-600: #7cbf00;
 }
 
 @theme inline {
@@ -51,7 +87,7 @@
   --shadow-premium: 0 8px 32px rgba(23, 32, 26, 0.1);
 }
 
-[data-theme="dark"] {
+[data-theme="dark"], .dark, html.dark {
   --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.25);
   --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.35);
   --shadow-premium: 0 8px 40px rgba(0, 0, 0, 0.45);
