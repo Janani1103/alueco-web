@@ -1,12 +1,15 @@
 "use client";
 
-import { siteConfig } from "@/data/site.config";
+import { useSiteData } from "@/context/SiteDataContext";
 
 export function FloatingWhatsApp() {
+  const { siteConfig } = useSiteData();
+  const whatsappUrl = siteConfig.social?.whatsapp || "https://wa.me/94770000000";
+
   return (
     <div className="fixed bottom-5 right-5 z-40 md:bottom-6 md:right-6">
       <a
-        href={siteConfig.social.whatsapp}
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="group flex h-14 min-h-[44px] min-w-[44px] items-center gap-0 overflow-hidden rounded-full bg-[#25D366] pl-3.5 pr-3.5 text-white shadow-[var(--shadow-hover)] transition-all duration-500 hover:gap-2.5 hover:pr-5 md:animate-[pulse-soft_3s_ease-in-out_infinite] md:hover:animate-none"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+<<<<<<< Updated upstream
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { PageHero } from "@/components/ui/PageHero";
 import { PageCTA } from "@/components/ui/PageCTA";
@@ -7,10 +8,17 @@ import { GalleryGrid } from "@/components/ui/GalleryGrid";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { projects, getProjectBySlug, getRelatedProjects } from "@/data/projects";
+=======
+import { projects } from "@/data/projects";
+import { getStoredProjects } from "@/lib/serverDataStore";
+import { ProjectDetailView } from "@/components/projects/ProjectDetailView";
+>>>>>>> Stashed changes
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -18,7 +26,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const allProjects = await getStoredProjects();
+  const project = allProjects.find((p) => p.slug === slug);
   if (!project) return { title: "Project Not Found" };
   return {
     title: `${project.title} – ${project.location}`,
@@ -28,9 +37,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const allProjects = await getStoredProjects();
+  const project = allProjects.find((p) => p.slug === slug);
   if (!project) notFound();
 
+<<<<<<< Updated upstream
   const related = getRelatedProjects(slug);
   const galleryImages = project.gallery.map((src, i) => ({
     src,
@@ -138,4 +149,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       </section>
     </>
   );
+=======
+  const related = allProjects.filter((p) => p.slug !== slug).slice(0, 3);
+
+  return <ProjectDetailView initialProject={project} relatedProjects={related} />;
+>>>>>>> Stashed changes
 }

@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { productCategories } from "@/data/products";
+import { useSiteData } from "@/context/SiteDataContext";
 
 interface QuoteFormProps {
   id?: string;
@@ -157,6 +158,7 @@ export function QuoteForm({
   showEmail = false,
   submitLabel = "Send Inquiry",
 }: QuoteFormProps) {
+  const { submitInquiry } = useSiteData();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -178,7 +180,30 @@ export function QuoteForm({
     }
     setErrors({});
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 900));
+
+    const name = form.get("name")?.toString().trim() || "";
+    const phone = form.get("phone")?.toString().trim() || "";
+    const email = form.get("email")?.toString().trim() || "";
+    const location = form.get("location")?.toString().trim() || "";
+    const product = form.get("product")?.toString().trim() || "";
+    const message = form.get("message")?.toString().trim() || "";
+
+    try {
+      await submitInquiry({
+        customerName: name,
+        customerPhone: phone,
+        customerEmail: email,
+        location: location,
+        productName: product || "Aluminium System",
+        vehicleName: product || "Aluminium System",
+        systemNeeded: product || "General Fabrication Inquiry",
+        notes: message,
+        type: "quotation",
+      });
+    } catch (err) {
+      console.error(err);
+    }
+
     setLoading(false);
     setSubmitted(true);
   };

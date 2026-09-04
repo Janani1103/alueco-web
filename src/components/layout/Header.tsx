@@ -9,7 +9,10 @@ import { Logo } from "@/components/layout/Logo";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
+import { useSiteData } from "@/context/SiteDataContext";
+
 export function Header() {
+  const { siteConfig } = useSiteData();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);

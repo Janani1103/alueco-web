@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { FloatingWhatsApp } from "@/components/layout/FloatingWhatsApp";
-import { PageTransition } from "@/components/layout/PageTransition";
+import { SiteShell } from "@/components/layout/SiteShell";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { SiteDataProvider } from "@/context/SiteDataContext";
 import { siteConfig } from "@/data/site.config";
 
 const inter = Inter({
@@ -41,23 +39,20 @@ export const metadata: Metadata = {
 };
 
 const themeInitScript = `
-(function(){try{var t=localStorage.getItem('alueco-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
+(function(){try{var t=localStorage.getItem('alueco-theme');var isDark=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(isDark){document.documentElement.classList.add('dark');document.documentElement.setAttribute('data-theme','dark');}else{document.documentElement.classList.remove('dark');document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();
 `;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} h-full scroll-smooth`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} h-full scroll-smooth`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="flex min-h-full flex-col bg-surface font-sans text-text antialiased">
         <ThemeProvider>
-          <Header />
-          <main className="flex-1">
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <Footer />
-          <FloatingWhatsApp />
+          <SiteDataProvider>
+            <SiteShell>{children}</SiteShell>
+          </SiteDataProvider>
         </ThemeProvider>
       </body>
     </html>

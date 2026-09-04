@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
+<<<<<<< Updated upstream
 import { siteConfig } from "@/data/site.config";
 import { PageHero } from "@/components/ui/PageHero";
 import { PageCTA } from "@/components/ui/PageCTA";
 import { QuoteForm } from "@/components/ui/QuoteForm";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { ContactMethodsGrid } from "@/components/contact/ContactMethodsGrid";
+=======
+import { ContactContent } from "@/components/contact/ContactContent";
+>>>>>>> Stashed changes
 
 export const metadata: Metadata = {
   title: "Contact",
   description: "Get in touch with ALUECO for premium aluminium doors, windows and fabrication in Sri Lanka.",
 };
 
+<<<<<<< Updated upstream
 const contactMethods = [
   { title: "Call Us", value: siteConfig.phone, href: `tel:${siteConfig.phone}` },
   { title: "WhatsApp", value: "Chat with us", href: siteConfig.social.whatsapp },
@@ -82,4 +87,8 @@ export default function ContactPage() {
       <PageCTA buttonLabel="Start Your Project" />
     </>
   );
+=======
+export default function ContactPage() {
+  return <ContactContent />;
+>>>>>>> Stashed changes
 }

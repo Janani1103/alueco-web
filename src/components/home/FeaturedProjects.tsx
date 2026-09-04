@@ -3,13 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { projects } from "@/data/projects";
+import { projects as defaultProjects } from "@/data/projects";
+import { useSiteData } from "@/context/SiteDataContext";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionLabel, SectionHeading } from "@/components/ui/SectionHeading";
 
 export function FeaturedProjects() {
+  const { projects: contextProjects } = useSiteData();
+  const projects = contextProjects && contextProjects.length > 0 ? contextProjects : defaultProjects;
   const scrollRef = useRef<HTMLDivElement>(null);
-  const featured = projects[0];
+  const featured = projects[0] || defaultProjects[0];
   const others = projects.slice(1);
 
   const scroll = (dir: "prev" | "next") => {

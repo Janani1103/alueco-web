@@ -1,0 +1,117 @@
+{
+  "name": "ALUECO ARCHITECTURAL SYSTEMS",
+  "tagline": "Sri Lanka's Premier Architectural Aluminium Systems Manufacturer",
+  "description": "ALUECO provides premium aluminium doors, windows, fabrication, installation and architectural aluminium solutions across Sri Lanka.",
+  "footerAbout": "Premium aluminium doors, windows and architectural facade engineering crafted to international standards across Sri Lanka.",
+  "copyright": "© 2026 ALUECO Architectural Systems (Pvt) Ltd. All Rights Reserved.",
+  "url": "https://alueco.lk",
+  "phone": "+94 77 123 4567",
+  "whatsapp": "+94771234567",
+  "email": "info@alueco.lk",
+  "address": {
+    "line1": "Wellaweriya",
+    "line2": "Sri Lanka"
+  },
+  "showroom": {
+    "name": "ALUECO Experience Center",
+    "location": "Wellaweriya, Sri Lanka",
+    "hours": "Monday – Saturday",
+    "time": "8:30 AM – 5:30 PM",
+    "shortHours": "Mon – Sat (8:30am – 5:30pm)"
+  },
+  "social": {
+    "facebook": "https://facebook.com/alueco",
+    "instagram": "https://instagram.com/alueco",
+    "whatsapp": "https://wa.me/94771234567",
+    "youtube": "https://youtube.com/alueco",
+    "linkedin": "https://linkedin.com/company/alueco"
+  },
+  "hero": {
+    "eyebrow": "PREMIUM ALUMINIUM SOLUTIONS",
+    "title": "Premium Aluminium",
+    "titleLine2": "Doors & Windows",
+    "titleHighlight": "Modern Sri Lankan Living",
+    "description": "Precision-engineered aluminium solutions designed for modern homes, commercial spaces and architectural projects across Sri Lanka.",
+    "slideIntervalMs": 7000,
+    "images": [
+      {
+        "src": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=3000&q=90&auto=format&fit=crop",
+        "alt": "Modern luxury residence with floor-to-ceiling aluminium glass windows and pool in Sri Lanka"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=3000&q=90&auto=format&fit=crop",
+        "alt": "Contemporary villa with large aluminium sliding doors opening to a landscaped garden"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=3000&q=90&auto=format&fit=crop",
+        "alt": "Premium bi-fold aluminium doors connecting indoor living space to outdoor terrace"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=3000&q=90&auto=format&fit=crop",
+        "alt": "Architectural interior with panoramic aluminium window walls and warm lighting"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=3000&q=90&auto=format&fit=crop",
+        "alt": "Modern apartment building with sleek aluminium window facades at dusk"
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=3000&q=90&auto=format&fit=crop",
+    "imageAlt": "Modern luxury residence with floor-to-ceiling aluminium glass windows in Sri Lanka",
+    "floatingCard": {
+      "title": "Premium Sliding Door",
+      "tags": "Smooth • Durable • Custom Designed",
+      "href": "/products/sliding-doors"
+    },
+    "ctas": {
+      "primary": {
+        "label": "Request a Free Quote",
+        "href": "/contact#quote"
+      },
+      "secondary": {
+        "label": "Explore Our Products",
+        "href": "/products"
+      },
+      "whatsapp": {
+        "label": "WhatsApp Us",
+        "href": "https://wa.me/94771234567"
+      },
+      "call": {
+        "label": "Call Now",
+        "href": "tel:+94771234567"
+      }
+    }
+  },
+  "homeProducts": {
+    "badge": "OUR PRODUCTS",
+    "heading": "Premium Aluminium Solutions",
+    "subheading": "Explore our precision-engineered aluminium solutions designed for modern homes and commercial spaces across Sri Lanka.",
+    "featuredBadge": "Featured Product",
+    "categoryOverrides": {}
+  },
+  "stats": [
+    {
+      "value": "10+",
+      "label": "Years Experience"
+    },
+    {
+      "value": "500+",
+      "label": "Completed Projects"
+    },
+    {
+      "value": "1000+",
+      "label": "Happy Customers"
+    },
+    {
+      "value": "100%",
+      "label": "Quality Focus"
+    }
+  ],
+  "about": {
+    "heroTitle": "Building Better Spaces with Aluminium",
+    "whoWeAre": "ALUECO is a leading premium aluminium fabrication company in Sri Lanka, specializing in doors, windows and architectural aluminium solutions for residential and commercial projects.",
+    "mission": "To deliver exceptional aluminium solutions through precision craftsmanship, quality materials and professional service that transforms spaces.",
+    "vision": "To be Sri Lanka's most trusted premium aluminium fabrication brand, setting the standard for quality and innovation.",
+    "whyAlueco": "We combine decades of expertise with modern fabrication technology to deliver products that perform beautifully for years.",
+    "quality": "Every product undergoes rigorous quality checks. From profile selection to final installation, we maintain the highest standards."
+  }
+}

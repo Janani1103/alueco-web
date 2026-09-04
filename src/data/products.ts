@@ -158,9 +158,9 @@ export const products: Product[] = [
       { label: "Max Height", value: "Up to 2.7m" },
     ],
     configurations: ["Single swing", "Double swing", "Pivot door"],
-    image: "https://images.unsplash.com/photo-1605276374101-de7982db7bb1?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
     gallery: [
-      "https://images.unsplash.com/photo-1605276374101-de7982db7bb1?w=1200&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80",
     ],
   },
   {

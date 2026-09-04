@@ -1,11 +1,95 @@
-export const siteConfig = {
-  name: "ALUECO",
-  tagline: "Premium Aluminium Doors & Windows in Sri Lanka",
+export interface HeroSlide {
+  src: string;
+  alt: string;
+}
+
+export interface HomeProductsCategoryOverride {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+export interface HomeProductsConfig {
+  badge: string;
+  heading: string;
+  subheading?: string;
+  featuredBadge?: string;
+  categoryOverrides?: Record<string, HomeProductsCategoryOverride>;
+}
+
+export interface SiteConfig {
+  name: string;
+  tagline: string;
+  description: string;
+  footerAbout?: string;
+  copyright?: string;
+  url: string;
+  phone: string;
+  whatsapp: string;
+  email: string;
+  address: {
+    line1: string;
+    line2: string;
+  };
+  showroom: {
+    name: string;
+    location: string;
+    hours: string;
+    time: string;
+    shortHours: string;
+  };
+  social: {
+    facebook: string;
+    instagram: string;
+    whatsapp: string;
+    youtube: string;
+    linkedin: string;
+  };
+  hero: {
+    eyebrow: string;
+    title: string;
+    titleLine2: string;
+    titleHighlight: string;
+    description: string;
+    slideIntervalMs: number;
+    images: HeroSlide[];
+    image: string;
+    imageAlt: string;
+    floatingCard: {
+      title: string;
+      tags: string;
+      href: string;
+    };
+    ctas: {
+      primary: { label: string; href: string };
+      secondary: { label: string; href: string };
+      whatsapp: { label: string; href: string };
+      call: { label: string; href: string };
+    };
+  };
+  homeProducts?: HomeProductsConfig;
+  stats: { value: string; label: string }[];
+  about: {
+    heroTitle: string;
+    whoWeAre: string;
+    mission: string;
+    vision: string;
+    whyAlueco: string;
+    quality: string;
+  };
+}
+
+export const siteConfig: SiteConfig = {
+  name: "ALUECO ARCHITECTURAL SYSTEMS",
+  tagline: "Sri Lanka's Premier Architectural Aluminium Systems Manufacturer",
   description:
     "ALUECO provides premium aluminium doors, windows, fabrication, installation and architectural aluminium solutions across Sri Lanka.",
+  footerAbout:
+    "Premium aluminium doors, windows and architectural facade engineering crafted to international standards across Sri Lanka.",
+  copyright: "© 2026 ALUECO Architectural Systems (Pvt) Ltd. All Rights Reserved.",
   url: "https://alueco.lk",
-  phone: "+94 XX XXX XXXX",
-  whatsapp: "+94XXXXXXXXX",
+  phone: "+94 77 123 4567",
+  whatsapp: "+94771234567",
   email: "info@alueco.lk",
   address: {
     line1: "Wellaweriya",
@@ -21,7 +105,7 @@ export const siteConfig = {
   social: {
     facebook: "https://facebook.com/alueco",
     instagram: "https://instagram.com/alueco",
-    whatsapp: "https://wa.me/94XXXXXXXXX",
+    whatsapp: "https://wa.me/94771234567",
     youtube: "https://youtube.com/alueco",
     linkedin: "https://linkedin.com/company/alueco",
   },
@@ -69,9 +153,16 @@ export const siteConfig = {
     ctas: {
       primary: { label: "Request a Free Quote", href: "/contact#quote" },
       secondary: { label: "Explore Our Products", href: "/products" },
-      whatsapp: { label: "WhatsApp Us", href: "https://wa.me/94XXXXXXXXX" },
-      call: { label: "Call Now", href: "tel:+94XXXXXXXXX" },
+      whatsapp: { label: "WhatsApp Us", href: "https://wa.me/94771234567" },
+      call: { label: "Call Now", href: "tel:+94771234567" },
     },
+  },
+  homeProducts: {
+    badge: "OUR PRODUCTS",
+    heading: "Premium Aluminium Solutions",
+    subheading: "Explore our precision-engineered aluminium solutions designed for modern homes and commercial spaces across Sri Lanka.",
+    featuredBadge: "Featured Product",
+    categoryOverrides: {},
   },
   stats: [
     { value: "10+", label: "Years Experience" },
@@ -92,4 +183,4 @@ export const siteConfig = {
     quality:
       "Every product undergoes rigorous quality checks. From profile selection to final installation, we maintain the highest standards.",
   },
-} as const;
+};

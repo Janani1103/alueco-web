@@ -1,0 +1,130 @@
+"use client";
+
+import Image from "next/image";
+import { useSiteData } from "@/context/SiteDataContext";
+import { Button } from "@/components/ui/Button";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { SectionLabel, SectionHeading } from "@/components/ui/SectionHeading";
+
+const showroomFeatures = [
+  {
+    title: "Product Displays",
+    description: "See our full range of doors, windows and systems in person.",
+    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&q=80",
+  },
+  {
+    title: "Aluminium Finishes",
+    description: "Explore powder coated, anodized and custom finish options.",
+    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80",
+  },
+  {
+    title: "Glass Options",
+    description: "Compare glazing types and glass configurations.",
+    image: "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=80",
+  },
+  {
+    title: "Consultation Area",
+    description: "Meet our team for personalized project consultation.",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+  },
+];
+
+export function ShowroomContent() {
+  const { siteConfig } = useSiteData();
+  const { showroom } = siteConfig;
+
+  return (
+    <>
+      <section className="relative">
+        <div className="relative h-[40vh] min-h-[300px] max-h-[420px] overflow-hidden">
+          <Image
+            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1400&q=80"
+            alt="ALUECO Experience Center showroom"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 flex items-center">
+            <div className="container-main">
+              <SectionLabel className="text-brand-secondary">SHOWROOM</SectionLabel>
+              <h1 className="mt-3 text-3xl font-bold text-white md:text-4xl">
+                {showroom.name}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 md:py-16">
+        <div className="container-main">
+          <div className="grid gap-10 lg:grid-cols-2">
+            <AnimatedSection>
+              <SectionHeading>{showroom.location}</SectionHeading>
+              <div className="mt-6 space-y-4">
+                <div>
+                  <h2 className="text-sm font-semibold text-brand">Opening Hours</h2>
+                  <p className="mt-1 text-text">{showroom.hours}</p>
+                  <p className="text-muted">{showroom.time}</p>
+                </div>
+                <div>
+                  <h2 className="text-sm font-semibold text-brand">Contact</h2>
+                  <p className="mt-1 text-text">{siteConfig.phone}</p>
+                  <p className="text-muted">{siteConfig.email}</p>
+                </div>
+              </div>
+              <div className="mt-8">
+                <Button href="https://maps.google.com/?q=Wellaweriya+Sri+Lanka" external>
+                  Visit Our Showroom
+                </Button>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={100}>
+              <div className="overflow-hidden rounded-[16px] border border-border">
+                <iframe
+                  title="ALUECO showroom location"
+                  src="https://maps.google.com/maps?q=Wellaweriya+Sri+Lanka&output=embed"
+                  className="h-80 w-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-section py-12 md:py-16">
+        <div className="container-main">
+          <div className="text-center">
+            <SectionLabel>WHAT TO EXPECT</SectionLabel>
+            <SectionHeading className="mt-3">Explore Our Experience Center</SectionHeading>
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {showroomFeatures.map((feature, i) => (
+              <AnimatedSection key={feature.title} delay={i * 80}>
+                <div className="overflow-hidden rounded-[14px] border border-border bg-surface">
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image
+                      src={feature.image}
+                      alt={feature.title}
+                      fill
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-heading">{feature.title}</h3>
+                    <p className="mt-2 text-sm text-muted">{feature.description}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
