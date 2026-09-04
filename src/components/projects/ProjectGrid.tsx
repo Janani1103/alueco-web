@@ -31,10 +31,10 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
             role="tab"
             aria-selected={active === filter.id}
             onClick={() => setActive(filter.id)}
-            className={`rounded-[9px] border px-4 py-2 text-sm font-medium transition-all ${
+            className={`rounded-[9px] border px-4 py-2 text-sm font-medium transition-all duration-300 ${
               active === filter.id
-                ? "border-brand bg-brand text-white"
-                : "border-border bg-surface text-text hover:border-brand hover:text-brand"
+                ? "scale-[1.02] border-brand bg-brand text-white shadow-[var(--shadow-subtle)]"
+                : "border-border bg-surface text-text hover:-translate-y-0.5 hover:border-brand hover:text-brand"
             }`}
           >
             {filter.label}
@@ -42,9 +42,15 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
         ))}
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((project) => (
-          <ProjectCard key={project.slug} project={project} variant="large" />
+      <div key={active} className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {filtered.map((project, i) => (
+          <div
+            key={project.slug}
+            className="animate-fade-up opacity-0"
+            style={{ animationDelay: `${i * 80}ms`, animationFillMode: "forwards" }}
+          >
+            <ProjectCard project={project} variant="large" />
+          </div>
         ))}
       </div>
 

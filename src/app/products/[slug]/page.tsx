@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Button } from "@/components/ui/Button";
+import { PageHero } from "@/components/ui/PageHero";
+import { PageCTA } from "@/components/ui/PageCTA";
+import { ImageGallery } from "@/components/ui/ImageGallery";
+import { GalleryGrid } from "@/components/ui/GalleryGrid";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { ProductCard } from "@/components/products/ProductCard";
 import { products, getProductBySlug, getRelatedProducts } from "@/data/products";
 import { siteConfig } from "@/data/site.config";
@@ -32,53 +35,41 @@ export default async function ProductDetailPage({ params }: PageProps) {
   if (!product) notFound();
 
   const related = getRelatedProducts(slug);
+  const allImages = [
+    { src: product.image, alt: product.name },
+    ...product.gallery
+      .filter((g) => g !== product.image)
+      .map((src, i) => ({ src, alt: `${product.name} - view ${i + 2}` })),
+  ];
 
   return (
     <>
+      <PageHero
+        label="PRODUCT"
+        title={product.name}
+        description={product.shortDescription}
+        image={product.image}
+        imageAlt={product.name}
+        size="large"
+      />
+
       <section className="py-12 md:py-16">
         <div className="container-main">
-          <Breadcrumb
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Products", href: "/products" },
-              { label: product.name },
-            ]}
-          />
+          <AnimatedSection>
+            <Breadcrumb
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Products", href: "/products" },
+                { label: product.name },
+              ]}
+            />
+          </AnimatedSection>
 
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-            <div>
-              <div className="overflow-hidden rounded-[16px] border border-border">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={700}
-                  height={525}
-                  className="aspect-[4/3] w-full object-cover"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              {product.gallery.length > 1 && (
-                <div className="mt-4 grid grid-cols-3 gap-3">
-                  {product.gallery.slice(0, 3).map((img, i) => (
-                    <div key={i} className="overflow-hidden rounded-[12px] border border-border">
-                      <Image
-                        src={img}
-                        alt={`${product.name} gallery ${i + 1}`}
-                        width={220}
-                        height={165}
-                        className="aspect-[4/3] w-full object-cover"
-                        sizes="33vw"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+          <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-16">
+            <ImageGallery images={allImages} priority />
 
-            <div>
-              <h1 className="text-3xl font-bold text-heading md:text-4xl">{product.name}</h1>
-              <p className="mt-4 text-base leading-relaxed text-muted">{product.description}</p>
+            <AnimatedSection delay={100}>
+              <p className="text-base leading-relaxed text-muted">{product.description}</p>
 
               <div className="mt-6">
                 <h2 className="text-sm font-semibold uppercase tracking-wider text-brand">
@@ -88,7 +79,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   {product.applications.map((app) => (
                     <li
                       key={app}
-                      className="rounded-full border border-border bg-section px-3 py-1 text-sm text-text"
+                      className="rounded-full border border-border bg-section px-3 py-1 text-sm text-text transition-colors hover:border-brand hover:text-brand"
                     >
                       {app}
                     </li>
@@ -130,18 +121,21 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   WhatsApp Us
                 </Button>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
       <section className="border-t border-border bg-section py-12 md:py-16">
         <div className="container-main space-y-12">
-          <div>
+          <AnimatedSection>
             <h2 className="text-2xl font-bold text-heading">Specifications</h2>
             <dl className="mt-4 grid gap-4 sm:grid-cols-2">
               {product.specifications.map((spec) => (
-                <div key={spec.label} className="rounded-[12px] border border-border bg-surface p-4">
+                <div
+                  key={spec.label}
+                  className="rounded-[12px] border border-border bg-surface p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-[var(--shadow-subtle)]"
+                >
                   <dt className="text-xs font-semibold uppercase tracking-wider text-muted">
                     {spec.label}
                   </dt>
@@ -149,52 +143,57 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 </div>
               ))}
             </dl>
-          </div>
+          </AnimatedSection>
 
-          <div>
+          <AnimatedSection delay={80}>
             <h2 className="text-2xl font-bold text-heading">Available Configurations</h2>
             <ul className="mt-4 flex flex-wrap gap-2">
               {product.configurations.map((c) => (
                 <li
                   key={c}
-                  className="rounded-[9px] border border-border bg-surface px-4 py-2 text-sm text-text"
+                  className="rounded-[9px] border border-border bg-surface px-4 py-2 text-sm text-text transition-colors hover:border-brand hover:text-brand"
                 >
                   {c}
                 </li>
               ))}
             </ul>
-          </div>
+          </AnimatedSection>
 
-          <div>
-            <h2 className="text-2xl font-bold text-heading">Gallery</h2>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {product.gallery.map((img, i) => (
-                <div key={i} className="overflow-hidden rounded-[14px] border border-border">
-                  <Image
-                    src={img}
-                    alt={`${product.name} - image ${i + 1}`}
-                    width={400}
-                    height={300}
-                    className="aspect-[4/3] w-full object-cover"
-                    sizes="33vw"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+          {allImages.length > 1 && (
+            <AnimatedSection delay={120}>
+              <h2 className="text-2xl font-bold text-heading">Gallery</h2>
+              <div className="mt-6">
+                <GalleryGrid images={allImages} />
+              </div>
+            </AnimatedSection>
+          )}
         </div>
       </section>
 
       <section className="py-12 md:py-16">
         <div className="container-main">
-          <h2 className="text-2xl font-bold text-heading">Related Products</h2>
+          <AnimatedSection>
+            <h2 className="text-2xl font-bold text-heading">Related Products</h2>
+          </AnimatedSection>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((p) => (
-              <ProductCard key={p.slug} product={p} />
+            {related.map((p, i) => (
+              <div
+                key={p.slug}
+                className="animate-fade-up opacity-0"
+                style={{ animationDelay: `${i * 80}ms`, animationFillMode: "forwards" }}
+              >
+                <ProductCard product={p} />
+              </div>
             ))}
           </div>
         </div>
       </section>
+
+      <PageCTA
+        title={`Interested in ${product.name}?`}
+        description="Get a free quote and our team will help you with measurements and installation."
+        buttonLabel="Get a Free Quote"
+      />
     </>
   );
 }

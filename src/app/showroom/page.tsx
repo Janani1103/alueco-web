@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { siteConfig } from "@/data/site.config";
 import { Button } from "@/components/ui/Button";
+import { PageHero } from "@/components/ui/PageHero";
+import { PageCTA } from "@/components/ui/PageCTA";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionLabel, SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -15,22 +17,22 @@ const showroomFeatures = [
   {
     title: "Product Displays",
     description: "See our full range of doors, windows and systems in person.",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200&q=85",
   },
   {
     title: "Aluminium Finishes",
     description: "Explore powder coated, anodized and custom finish options.",
-    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=85",
   },
   {
     title: "Glass Options",
     description: "Compare glazing types and glass configurations.",
-    image: "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200&q=85",
   },
   {
     title: "Consultation Area",
     description: "Meet our team for personalized project consultation.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85",
   },
 ];
 
@@ -39,27 +41,14 @@ export default function ShowroomPage() {
 
   return (
     <>
-      <section className="relative">
-        <div className="relative h-[40vh] min-h-[300px] max-h-[420px] overflow-hidden">
-          <Image
-            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1400&q=80"
-            alt="ALUECO Experience Center showroom"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0 flex items-center">
-            <div className="container-main">
-              <SectionLabel className="text-brand-secondary">SHOWROOM</SectionLabel>
-              <h1 className="mt-3 text-3xl font-bold text-white md:text-4xl">
-                {showroom.name}
-              </h1>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        label="SHOWROOM"
+        title={showroom.name}
+        description={`Visit us in ${showroom.location} — ${showroom.shortHours}`}
+        image="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=3000&q=90&auto=format&fit=crop"
+        imageAlt="ALUECO Experience Center showroom"
+        size="large"
+      />
 
       <section className="py-12 md:py-16">
         <div className="container-main">
@@ -67,12 +56,12 @@ export default function ShowroomPage() {
             <AnimatedSection>
               <SectionHeading>{showroom.location}</SectionHeading>
               <div className="mt-6 space-y-4">
-                <div>
+                <div className="rounded-[14px] border border-border bg-surface p-5 transition-all duration-300 hover:border-brand/40 hover:shadow-[var(--shadow-subtle)]">
                   <h2 className="text-sm font-semibold text-brand">Opening Hours</h2>
                   <p className="mt-1 text-text">{showroom.hours}</p>
                   <p className="text-muted">{showroom.time}</p>
                 </div>
-                <div>
+                <div className="rounded-[14px] border border-border bg-surface p-5 transition-all duration-300 hover:border-brand/40 hover:shadow-[var(--shadow-subtle)]">
                   <h2 className="text-sm font-semibold text-brand">Contact</h2>
                   <p className="mt-1 text-text">{siteConfig.phone}</p>
                   <p className="text-muted">{siteConfig.email}</p>
@@ -86,7 +75,7 @@ export default function ShowroomPage() {
             </AnimatedSection>
 
             <AnimatedSection delay={100}>
-              <div className="overflow-hidden rounded-[16px] border border-border">
+              <div className="overflow-hidden rounded-[16px] border border-border shadow-[var(--shadow-subtle)] transition-shadow duration-300 hover:shadow-[var(--shadow-hover)]">
                 <iframe
                   title="ALUECO showroom location"
                   src="https://maps.google.com/maps?q=Wellaweriya+Sri+Lanka&output=embed"
@@ -102,20 +91,20 @@ export default function ShowroomPage() {
 
       <section className="bg-section py-12 md:py-16">
         <div className="container-main">
-          <div className="text-center">
+          <AnimatedSection className="text-center">
             <SectionLabel>WHAT TO EXPECT</SectionLabel>
             <SectionHeading className="mt-3">Explore Our Experience Center</SectionHeading>
-          </div>
+          </AnimatedSection>
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {showroomFeatures.map((feature, i) => (
               <AnimatedSection key={feature.title} delay={i * 80}>
-                <article className="overflow-hidden rounded-[14px] border border-border bg-surface">
+                <article className="group overflow-hidden rounded-[14px] border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[var(--shadow-hover)]">
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
                       src={feature.image}
                       alt={feature.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       sizes="50vw"
                     />
                   </div>
@@ -129,6 +118,14 @@ export default function ShowroomPage() {
           </div>
         </div>
       </section>
+
+      <PageCTA
+        title="Ready to Visit?"
+        description="Experience ALUECO quality in person at our Wellaweriya showroom."
+        buttonLabel="Get Directions"
+        buttonHref="https://maps.google.com/?q=Wellaweriya+Sri+Lanka"
+        buttonExternal
+      />
     </>
   );
 }
