@@ -14,34 +14,27 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
-  // Synchronous session check on mount to prevent any loading delays between tabs
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
-      if (pathname === "/admin/login") return true;
-      return (
-        sessionStorage.getItem("alueco_admin_auth") === "true" ||
-        sessionStorage.getItem("glx_admin_auth") === "true" ||
-        sessionStorage.getItem("app_admin_auth") === "true"
-      );
-    }
-    return true;
-  });
+  const [mounted, setMounted] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (pathname === "/admin/login") return;
+    setMounted(true);
 
-    if (typeof window !== "undefined") {
-      const auth =
-        sessionStorage.getItem("alueco_admin_auth") === "true" ||
-        sessionStorage.getItem("glx_admin_auth") === "true" ||
-        sessionStorage.getItem("app_admin_auth") === "true";
+    if (pathname === "/admin/login") {
+      setIsAuthenticated(true);
+      return;
+    }
 
-      if (!auth) {
-        setIsAuthenticated(false);
-        router.replace("/admin/login");
-      } else {
-        setIsAuthenticated(true);
-      }
+    const auth =
+      sessionStorage.getItem("alueco_admin_auth") === "true" ||
+      sessionStorage.getItem("glx_admin_auth") === "true" ||
+      sessionStorage.getItem("app_admin_auth") === "true";
+
+    if (!auth) {
+      setIsAuthenticated(false);
+      router.replace("/admin/login");
+    } else {
+      setIsAuthenticated(true);
     }
   }, [pathname, router]);
 
@@ -49,14 +42,14 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
     return <>{children}</>;
   }
 
-  // Only show fallback if definitely unauthenticated while redirecting to login
-  if (!isAuthenticated) {
+  // Before mounting on client or if not authenticated, render loading screen matching server & client
+  if (!mounted || !isAuthenticated) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4 text-slate-900 dark:text-white">
         <div className="flex flex-col items-center gap-3 p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl">
           <Loader2 className="w-8 h-8 text-lime-500 animate-spin" />
           <span className="text-xs text-slate-600 dark:text-slate-400 font-semibold">
-            Redirecting to Admin Login...
+            {mounted ? "Redirecting to Admin Login..." : "Loading Admin..."}
           </span>
         </div>
       </div>
